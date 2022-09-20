@@ -1,6 +1,8 @@
 package main
 
-import "net"
+import (
+	"net"
+)
 
 type User struct {
 	Name string
@@ -12,7 +14,6 @@ type User struct {
 // 创建用户API
 func NewUser(conn net.Conn) *User {
 	UserAddr := conn.RemoteAddr().String()
-
 	user := &User{
 		Name: UserAddr,
 		Addr: UserAddr,
@@ -25,7 +26,7 @@ func NewUser(conn net.Conn) *User {
 	return user
 }
 
-// 监听User channel方法
+// 监听User channel
 func (this *User) ListenMessage() {
 	for {
 		//FIXME：强踢功能需要关闭管道，这里暂不处理会造成死循环，待解决
